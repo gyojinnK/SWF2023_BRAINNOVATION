@@ -5,13 +5,13 @@ contract DonationAndCustomization {
     // 기부 이벤트 선언
     event DonationReceived(address indexed donor, uint256 amount);
 
-    // 캐릭터 커스터마이징 함수를 호출할 때 발생하는 이벤트를 선언합니다.
+    // 캐릭터 커스터마이징 함수를 호출할 때 발생하는 이벤트를 선언
     event CharacterCustomized(address indexed owner, string name, uint256 clothes, uint accessory);
 
-    // ERC-20 토큰의 Transfer 이벤트를 선언합니다.
+    // ERC-20 토큰의 Transfer 이벤트를 선언
     event Transfer(address indexed from, address indexed to, uint256 value);
 
-    // ERC-20 토큰의 Approval 이벤트를 선언합니다.
+    // ERC-20 토큰의 Approval 이벤트를 선언
     event Approval(address indexed owner, address indexed spender, uint256 value);
 
     // 기부자를 저장하기 위한 배열 선언
@@ -20,7 +20,9 @@ contract DonationAndCustomization {
     // 기부자의 기부금을 저장하기 위한 매핑 선언
     mapping(address => uint256) public donations;
 
-    //토큰의 승인 전송을 위한 매핑
+    //mapping(address => Character) public
+
+    //토큰의 승인, 전송을 위한 매핑
     mapping(address => uint256) public balanceOf;
     mapping(address => mapping(address => uint256)) public allowance;
 
@@ -59,7 +61,7 @@ contract DonationAndCustomization {
         uint256 accessory
         
     ) public {
-        // 기부자의 기부금이 커스터마이징 비용울 충분히 충당하는지 검증
+        // 기부자의 기부금이 커스터마이징 비용을 충분히 충당하는지 검증
         require(donations[msg.sender] >= computeCustomizationCost(clothes, accessory), "Insufficient donation to customize your character.");
 
         //캐릭터 정보 업데이트
