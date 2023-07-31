@@ -4,7 +4,7 @@ const truffleAssert = require('truffle-assertions');
 const testDonation = 10 ** 15;
 
 
-contract("test", function([deployer, user1, user2]) {
+contract("test", function([deployer, user1, user2, user3]) {
     let test;
 
     //beforeEach를 사용해서 스마트 컨트랙트 인스턴스를 생성
@@ -14,13 +14,26 @@ contract("test", function([deployer, user1, user2]) {
 
     describe.only('Donate', () => {
         it.only('should allow users to donate ether', async() =>{
+            console.log(await test.donate({from: user1, value: testDonation}));
             console.log(await test.donate({from: user2, value: testDonation}));
+            console.log(await test.donate({from: user3, value: testDonation}));
             let totalD = await test.getTotalDonations();
             console.log(`Total: ${totalD}`);
             console.log('================');
             console.log(user2);
             let donation = await test.getDonators(user2);
             console.log(donation.toString());
+
+            //Donors 배열 길이 구하기
+            let Dolen = await test.getDonors();
+            console.log(`length: ${Dolen}`);
+
+            // 토큰 지급
+            await test.createGC(user1);
+            let giveGC = await test.getGC(user1);
+            console.log(`GC: ${giveGC}`)
+
+
         });
     })
      
@@ -31,6 +44,9 @@ contract("test", function([deployer, user1, user2]) {
       })
 
       
+
+
+
 
 
 
