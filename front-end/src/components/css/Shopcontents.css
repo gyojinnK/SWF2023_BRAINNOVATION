@@ -1,0 +1,13 @@
+.shopcontentsWrap {
+    width: 85%;
+    height: 800px;
+    background-color: white;
+    margin: 0 auto;
+}
+
+.shopcontents__caption {
+    margin: 0;
+    padding: 40px 0;
+    font-size: 1.5rem;
+    font-family: "PretendardTtfBold";
+}

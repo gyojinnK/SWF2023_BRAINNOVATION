@@ -1,0 +1,12 @@
+.iInfoWrap {
+    width: 200px;
+    display: inline-block;
+    margin: 0 54px;
+}
+
+.item__img {
+    width: 200px;
+    height: 200px;
+    box-sizing: border-box;
+    border: 3px solid lightgreen;
+}

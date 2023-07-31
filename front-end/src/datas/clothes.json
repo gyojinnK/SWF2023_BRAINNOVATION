@@ -1,0 +1,42 @@
+[
+    {
+        "url": "../img/item1.png",
+        "name": "Single Black Jacket",
+        "cost": "200"
+    },
+    {
+        "url": "../img/item2.png",
+        "name": "White Jacket",
+        "cost": "200"
+    },
+    {
+        "url": "../img/item3.png",
+        "name": "Amazon Jaket",
+        "cost": "200"
+    },
+    {
+        "url": "../img/item4.png",
+        "name": "Trucker Jacket",
+        "cost": "200"
+    },
+    {
+        "url": "../img/item5.png",
+        "name": "Black Vest",
+        "cost": "200"
+    },
+    {
+        "url": "../img/item6.png",
+        "name": "Zip Up Jacket",
+        "cost": "200"
+    },
+    {
+        "url": "../img/item7.png",
+        "name": "Training Jacket",
+        "cost": "200"
+    },
+    {
+        "url": "../img/item8.png",
+        "name": "Brown Jacket",
+        "cost": "200"
+    }
+]

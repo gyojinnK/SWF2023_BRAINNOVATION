@@ -1,0 +1,31 @@
+.shopConBtnWrap {
+    margin: 0 0 50px 0;
+}
+
+.scBtn {
+    border: none;
+    width: 100px;
+    font-family: "PretendardTtfRegular";
+    font-size: 1.2rem;
+    padding: 0;
+    background-color: white;
+    cursor: pointer;
+}
+
+.scBtn__underWrap {
+    background-color: burlywood;
+    width: 130px;
+    margin: 5px auto 0;
+    position: relative;
+}
+
+.scBtn__underWrap_el {
+    background-color: black;
+    height: 7px;
+    width: 30px;
+    border-radius: 25px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: 0.5s;
+}
