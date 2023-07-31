@@ -21,7 +21,7 @@ contract Test{
         owner = payable(sender);
     }
 
-    function donate() public payable returns (bool result){
+    function donate() public payable {
         // 기부금이 0 ETH 이상인지
         require(msg.value > 0, 'You must send some ether to donate');
         // 기부자의 기부금을 업데이트
@@ -39,7 +39,15 @@ contract Test{
         emit DONATION(msg.sender, msg.value);
     }
 
+    function getDonators(address donator) public view returns(uint256 result){
+        require(donators[donator] > 0, 'This account did not donate');
+        uint256 donation = donators[donator];
+        return donation;
+    }
+
     function getTotalDonations() public view returns(uint256 result) {
         return _totalDonations;
     }
+
+
 }
