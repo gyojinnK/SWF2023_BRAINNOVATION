@@ -12,16 +12,27 @@ contract("test", function([deployer, user1, user2]) {
         test = await Test.new();
       });
 
-      it.only('should allow users to donate ether', async() =>{
-          console.log(await test.donate({from: user2, value: testDonation}));
-          let totalD = await test.getTotalDonations();
-        console.log(`Total: ${totalD}`);
-      });
+    describe.only('Donate', () => {
+        it.only('should allow users to donate ether', async() =>{
+            console.log(await test.donate({from: user2, value: testDonation}));
+            let totalD = await test.getTotalDonations();
+            console.log(`Total: ${totalD}`);
+            console.log('================');
+            console.log(user2);
+            let donation = await test.getDonators(user2);
+            console.log(donation.toString());
+        });
+    })
+     
 
       it('accounts Check', async() =>{
         let accounts = await web3.eth.getAccounts();
         console.log(accounts[0]);
       })
+
+      
+
+
 
       /**
        * @dev 기부를 한 후에 기부자의 잔액이 올바르게 차감 되었는지 확인
