@@ -30,21 +30,21 @@ function App() {
         };
     }
 
-    // 전체 기부금액 확인
-    const getTotalDonations = async () => {
-        if (donate) {
-            let total = await donate.methods.getTotalDonations().call();
-            console.log(total);
-        }
-    };
+    // // 전체 기부금액 확인
+    // const getTotalDonations = async () => {
+    //     if (donate) {
+    //         let total = await donate.methods.getTotalDonations().call();
+    //         console.log(total);
+    //     }
+    // };
 
-    // 현 account의 기부 누적 금액 확인
-    const getDonatorsDonation = async () => {
-        if (donate && account) {
-            let donation = await donate.methods.getDonators(account).call();
-            console.log(donation);
-        }
-    };
+    // // 현 account의 기부 누적 금액 확인
+    // const getDonatorsDonation = async () => {
+    //     if (donate && account) {
+    //         let donation = await donate.methods.getDonators(account).call();
+    //         console.log(donation);
+    //     }
+    // };
 
     useEffect(() => {
         (async function () {
@@ -62,13 +62,18 @@ function App() {
     }, [account]);
 
     useEffect(() => {
-        getTotalDonations();
-        getDonatorsDonation();
+        // getTotalDonations();
+        // getDonatorsDonation();
     }, [account]);
 
     return (
         <div className="App">
-            <Mainwrap balance={balance} account={account} />
+            <Mainwrap
+                balance={balance}
+                account={account}
+                web3={web3}
+                donate={donate}
+            />
         </div>
     );
 }

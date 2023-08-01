@@ -1,18 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "./css/Donate.css";
 import xicon from "../img/xicon.png";
 import donateIMG from "../img/donateImg.png";
 
 const Donate = (props: any) => {
+    const [values, setValues] = useState<{
+        address: string;
+        donationCost: string;
+    }>({
+        address: props.accounts,
+        donationCost: "",
+    });
+
     const closeHandler = () => {
         props.onSetIsOpen(false);
+    };
+
+    const changeHandler = (e: any) => {
+        setValues({
+            address: props.account,
+            donationCost: e.target.value,
+        });
+    };
+
+    const submitHandler = async (e: any) => {
+        e.preventDefault();
+        let ethToWei = parseFloat(values.donationCost) * 1000000000000000000;
+        if (props.donate) {
+            let resp = props.donate.methods
+                .donate()
+                .send({ from: props.account, value: ethToWei });
+            console.log(resp);
+        }
     };
 
     return (
         <div className="totalWrap">
             <div className="dnsale_Background" onClick={closeHandler}></div>
-            <div className="dnsaleWrap">
+            <form className="dnsaleWrap" onSubmit={submitHandler}>
                 <img className="x" src={xicon} alt="x" onClick={closeHandler} />
                 <p className="dn_buy">기부하기</p>
                 <div className="dn_underBar"></div>
@@ -32,7 +58,13 @@ const Donate = (props: any) => {
                 <div className="dn_totalcostWrap">
                     <p className="dn_totalcost_txt">기부 금액</p>
                     <div className="dn_donateSendWrap">
-                        <p className="dn_totalcost_cost">{props.cost}0.01</p>
+                        <input
+                            className="dn_totalcost_cost"
+                            type="text"
+                            name="donationCost"
+                            onChange={changeHandler}
+                            value={values.donationCost}
+                        />
                         <p className="dn_eth">ETH</p>
                     </div>
                 </div>
@@ -49,8 +81,10 @@ const Donate = (props: any) => {
                     <p className="dn_transfer_txt">지급 GC</p>
                     <p className="dn_transfer_dn"> GC</p>
                 </div>
-                <button className="dn_donate_btn">구매하기</button>
-            </div>
+                <button type="submit" className="dn_donate_btn">
+                    구매하기
+                </button>
+            </form>
         </div>
     );
 };

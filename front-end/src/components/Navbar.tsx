@@ -4,7 +4,7 @@ import "./css/Navbar.css";
 import Button from "./UI/Button";
 import Donate from "./Donate";
 
-const Navbar = () => {
+const Navbar = (props: any) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     return (
@@ -23,7 +23,14 @@ const Navbar = () => {
                     Donate
                 </button>
             </div>
-            {isOpen ? <Donate onSetIsOpen={setIsOpen} /> : undefined}
+            {isOpen ? (
+                <Donate
+                    onSetIsOpen={setIsOpen}
+                    account={props.account}
+                    web3={props.web3}
+                    donate={props.donate}
+                />
+            ) : undefined}
         </nav>
     );
 };
