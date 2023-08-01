@@ -33,6 +33,17 @@ contract("test", function([deployer, user1, user2, user3]) {
             let giveGC = await test.getGC(user1);
             console.log(`GC: ${giveGC}`)
 
+            // 50 금액 임의로 지급
+            await test.createItem(50);
+
+            let buyItem_user1 = await test.buyItem(user1,0);
+
+            const purchased_item = await test.items(0); 
+            console.log(`Item Price: ${purchased_item.price}, Purchased: ${purchased_item.purchased}`);
+
+            //구매 후 잔액 조회
+            const balanceOfUser1 = await test.GC(user1);
+            console.log(`Balance of user1 after purchase: ${balanceOfUser1}`);
 
         });
     })
@@ -44,12 +55,6 @@ contract("test", function([deployer, user1, user2, user3]) {
       })
 
       
-
-
-
-
-
-
       /**
        * @dev 기부를 한 후에 기부자의 잔액이 올바르게 차감 되었는지 확인
        * 

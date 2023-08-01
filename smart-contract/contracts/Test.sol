@@ -7,12 +7,10 @@ contract Test{
         uint256 donation;   // 기부금
     }
 
-    //캐릭터 정보를 저장하기 위한 구조체를 정의
-    struct Character {
-        string name;
-        uint256 clothes;
-        uint256 accessory;
-        
+
+    struct Item {
+        uint256 price; // 아이템 가격
+        bool purchased; //내가 구매한 아이템인지 아닌지를 확인
     }
 
     address payable owner;
@@ -21,11 +19,13 @@ contract Test{
 
     DonatorInfo[] public donors;    
     uint256[] public GCs;
-    Character[] public character;
+    uint256 itemCount = 0 ;    
 
     mapping(address => uint256) public donators;
     mapping(address => uint256) public GC;
-    mapping(address => uint256) public characters;
+    mapping(uint256 =>  Item) public items; // 아이템 ID에 해당하는 아이템 정보를 저장하는 매핑
+
+
 
     event DONATION(address indexed donator, uint256 donation);
     event CREATEGC(address indexed donator, uint256 GC);
@@ -96,11 +96,38 @@ contract Test{
            return GC[donator];
     }
 
-    function getCharac(address charact) public view returns(uint256 result) {
-        require(characters[charact] > 0 , "Yon have nice character");
-        uint256 charec = characters[charact];
-        return charec;
+    function createItem(uint256 itemPrice) public {
+       // 아이템이 생성 된 후 count값이 1 증가 -> 즉 아이템마다 고유 번호를 가지게 됌
+       items[itemCount++] = Item(itemPrice, false);
+    }
+
+    // 아이템 구매 기능
+    function buyItem(address donator, uint256 itemId) public {
+        require(GC[donator] > 0, "You don't have GCOIN.");
+    
+        //itemId에 해당하는 아이템 정보를 가져옴
+        Item storage item = items[itemId];
+
+        //구매할 충분한 CG가 있는지 확인
+        require(GC[donator] >= item.price, "Not enough GC to buy this item");
+
+        //차감 함수 호출
+        deductBalance(donator, item.price);
+
+        //마킹 -> 내가 이 아이템을 구매 했는지 안했는지 구매가 성공했으면 true 아니면 false
+        item.purchased = true;
+        
+    }
+
+    // 차감 함수
+    function deductBalance(address donator, uint256 amount) internal  {
+        GC[donator] -= amount;
+    }
+
+
     
 
-    }
+
+
+
 }
