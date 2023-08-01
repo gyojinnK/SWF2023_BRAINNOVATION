@@ -1,11 +1,289 @@
 import { MetaMaskInpageProvider } from "@metamask/providers";
-import Web3 from "web3";
+import Web3, { Contract } from "web3";
 
 import { useEffect, useState } from "react";
 
-export const useWeb3 = (): [string, Web3 | undefined] => {
+let donateAddress = "0x603bffbe06222f6af45858483911616382c09207";
+let donateABI = [
+    {
+        inputs: [],
+        stateMutability: "nonpayable",
+        type: "constructor",
+    },
+    {
+        anonymous: false,
+        inputs: [
+            {
+                indexed: true,
+                internalType: "address",
+                name: "donator",
+                type: "address",
+            },
+            {
+                indexed: false,
+                internalType: "uint256",
+                name: "GC",
+                type: "uint256",
+            },
+        ],
+        name: "CREATEGC",
+        type: "event",
+    },
+    {
+        anonymous: false,
+        inputs: [
+            {
+                indexed: true,
+                internalType: "address",
+                name: "donator",
+                type: "address",
+            },
+            {
+                indexed: false,
+                internalType: "uint256",
+                name: "donation",
+                type: "uint256",
+            },
+        ],
+        name: "DONATION",
+        type: "event",
+    },
+    {
+        inputs: [
+            {
+                internalType: "address",
+                name: "",
+                type: "address",
+            },
+        ],
+        name: "GC",
+        outputs: [
+            {
+                internalType: "uint256",
+                name: "",
+                type: "uint256",
+            },
+        ],
+        stateMutability: "view",
+        type: "function",
+        constant: true,
+    },
+    {
+        inputs: [
+            {
+                internalType: "uint256",
+                name: "",
+                type: "uint256",
+            },
+        ],
+        name: "GCs",
+        outputs: [
+            {
+                internalType: "uint256",
+                name: "",
+                type: "uint256",
+            },
+        ],
+        stateMutability: "view",
+        type: "function",
+        constant: true,
+    },
+    {
+        inputs: [
+            {
+                internalType: "address",
+                name: "",
+                type: "address",
+            },
+        ],
+        name: "donators",
+        outputs: [
+            {
+                internalType: "uint256",
+                name: "",
+                type: "uint256",
+            },
+        ],
+        stateMutability: "view",
+        type: "function",
+        constant: true,
+    },
+    {
+        inputs: [
+            {
+                internalType: "uint256",
+                name: "",
+                type: "uint256",
+            },
+        ],
+        name: "donors",
+        outputs: [
+            {
+                internalType: "address payable",
+                name: "donator",
+                type: "address",
+            },
+            {
+                internalType: "uint256",
+                name: "donation",
+                type: "uint256",
+            },
+        ],
+        stateMutability: "view",
+        type: "function",
+        constant: true,
+    },
+    {
+        inputs: [
+            {
+                internalType: "uint256",
+                name: "",
+                type: "uint256",
+            },
+        ],
+        name: "items",
+        outputs: [
+            {
+                internalType: "uint256",
+                name: "price",
+                type: "uint256",
+            },
+            {
+                internalType: "bool",
+                name: "purchased",
+                type: "bool",
+            },
+        ],
+        stateMutability: "view",
+        type: "function",
+        constant: true,
+    },
+    {
+        inputs: [],
+        name: "donate",
+        outputs: [],
+        stateMutability: "payable",
+        type: "function",
+        payable: true,
+    },
+    {
+        inputs: [
+            {
+                internalType: "address",
+                name: "donator",
+                type: "address",
+            },
+        ],
+        name: "getDonators",
+        outputs: [
+            {
+                internalType: "uint256",
+                name: "result",
+                type: "uint256",
+            },
+        ],
+        stateMutability: "view",
+        type: "function",
+        constant: true,
+    },
+    {
+        inputs: [],
+        name: "getDonors",
+        outputs: [
+            {
+                internalType: "uint256",
+                name: "result",
+                type: "uint256",
+            },
+        ],
+        stateMutability: "view",
+        type: "function",
+        constant: true,
+    },
+    {
+        inputs: [],
+        name: "getTotalDonations",
+        outputs: [
+            {
+                internalType: "uint256",
+                name: "result",
+                type: "uint256",
+            },
+        ],
+        stateMutability: "view",
+        type: "function",
+        constant: true,
+    },
+    {
+        inputs: [
+            {
+                internalType: "address",
+                name: "donator",
+                type: "address",
+            },
+        ],
+        name: "createGC",
+        outputs: [],
+        stateMutability: "nonpayable",
+        type: "function",
+    },
+    {
+        inputs: [
+            {
+                internalType: "address",
+                name: "donator",
+                type: "address",
+            },
+        ],
+        name: "getGC",
+        outputs: [
+            {
+                internalType: "uint256",
+                name: "result",
+                type: "uint256",
+            },
+        ],
+        stateMutability: "view",
+        type: "function",
+        constant: true,
+    },
+    {
+        inputs: [
+            {
+                internalType: "uint256",
+                name: "itemPrice",
+                type: "uint256",
+            },
+        ],
+        name: "createItem",
+        outputs: [],
+        stateMutability: "nonpayable",
+        type: "function",
+    },
+    {
+        inputs: [
+            {
+                internalType: "address",
+                name: "donator",
+                type: "address",
+            },
+            {
+                internalType: "uint256",
+                name: "itemId",
+                type: "uint256",
+            },
+        ],
+        name: "buyItem",
+        outputs: [],
+        stateMutability: "nonpayable",
+        type: "function",
+    },
+];
+
+export const useWeb3 = (): [any, string, Web3 | any] => {
     const [account, setAccount] = useState<string>("");
-    const [web3, setWeb3] = useState<Web3 | undefined>(undefined);
+    const [web3, setWeb3] = useState<Web3 | undefined>();
+    const [donate, setDonate] = useState<any>();
 
     /**
      * @dev 현재 metamask의 chainId를 요청
@@ -73,9 +351,13 @@ export const useWeb3 = (): [string, Web3 | undefined] => {
 
                 const web3 = new Web3((window as any).ethereum);
                 setWeb3(web3);
+
+                const donate = new web3.eth.Contract(donateABI, donateAddress);
+                setDonate(donate);
             }
         })();
+        return () => {};
     });
 
-    return [account, web3];
+    return [donate, account, web3];
 };

@@ -1,2 +1,0 @@
-// font
-declare module "*.ttf";

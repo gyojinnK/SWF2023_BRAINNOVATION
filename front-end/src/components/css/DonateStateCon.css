@@ -1,0 +1,63 @@
+.dsCon {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.dsCon_header {
+    width: 50%;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.dsCon_img {
+    width: 250px;
+    height: 250px;
+}
+
+.dsCon_dDay,
+.dsCon_cnt {
+    color: white;
+    padding: 10px 0;
+    font-family: "PretendardTtfBold";
+    font-size: 1.25rem;
+    display: inline-block;
+    margin: 0 3px 0;
+}
+
+.dsCon_dDay {
+    width: 120px;
+    border-radius: 10px;
+    background-color: rgba(47, 101, 245);
+}
+
+.dsCon_cnt {
+    width: 150px;
+    border-radius: 10px;
+    background-color: rgba(47, 101, 245);
+}
+
+.dsCon_graphWrap {
+    width: 100%;
+    position: relative;
+}
+
+.dsCon_graph_frame {
+    width: 60%;
+    height: 50px;
+    background-color: white;
+    border-radius: 10px;
+    margin: 0 auto;
+    position: absolute;
+    top: -60px;
+    left: calc(50% - 30%);
+    box-shadow: rgb(180, 180, 180) 0px 0px 10px;
+}
+
+.dsCon_graph_elem {
+}
+
+.dsCon_graph_per {
+}

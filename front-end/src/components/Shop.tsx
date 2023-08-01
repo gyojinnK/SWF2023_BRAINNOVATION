@@ -7,7 +7,7 @@ import Shopcontents from "./Shopcontents";
 const Shop = () => {
     return (
         <div className="shopWrap">
-            <p className="shop__caption">Shop</p>
+            <p className="shop__caption">스토어</p>
             <Shopheader />
             <Shopcontents />
         </div>

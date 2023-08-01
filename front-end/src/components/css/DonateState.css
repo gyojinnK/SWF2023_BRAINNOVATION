@@ -1,0 +1,13 @@
+.dStateWrap {
+    width: 100%;
+    border-radius: 10px;
+    height: 500px;
+    margin: 40px 0 0 0;
+}
+
+.dState_caption {
+    font-size: 1.5rem;
+    font-family: "PretendardTtfBold";
+    margin: 130px auto 0;
+    width: 95%;
+}

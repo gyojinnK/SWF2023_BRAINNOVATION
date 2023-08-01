@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "./css/Navbar.css";
-import search from "../img/search.png";
-import burger from "../img/menu-burger.png";
 import Button from "./UI/Button";
+import Donate from "./Donate";
 
 const Navbar = () => {
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+
     return (
         <nav>
             <div className="logoWrap">
@@ -18,8 +19,11 @@ const Navbar = () => {
                 <Button>Organization</Button>
             </div>
             <div className="donateWrap">
-                <button className="donateBtn">Donate</button>
+                <button className="donateBtn" onClick={() => setIsOpen(true)}>
+                    Donate
+                </button>
             </div>
+            {isOpen ? <Donate onSetIsOpen={setIsOpen} /> : undefined}
         </nav>
     );
 };
