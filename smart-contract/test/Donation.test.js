@@ -1,28 +1,28 @@
-const Test = artifacts.require("test");
+const Donation = artifacts.require("donation");
 const { assert } = require("chai");
 const truffleAssert = require('truffle-assertions');
 const testDonation = 10 ** 14;
 
 
-contract("test", function([deployer, user1, user2, user3]) {
-    let test;
+contract("donation", function([deployer, user1, user2, user3]) {
+    let donation;
 
     //beforeEach를 사용해서 스마트 컨트랙트 인스턴스를 생성
     beforeEach(async () => {
-        test = await Test.new();
+        donation = await Donation.new();
       });
 
     describe.only('Donate', () => {
         it('should allow users to donate ether', async() =>{
-            console.log(await test.donate({from: user1, value: testDonation}));
-            console.log(await test.donate({from: user2, value: testDonation}));
-            console.log(await test.donate({from: user3, value: testDonation}));
-            let totalD = await test.getTotalDonations();
+            console.log(await donation.donate({from: user1, value: testDonation}));
+            console.log(await donation.donate({from: user2, value: testDonation}));
+            console.log(await donation.donate({from: user3, value: testDonation}));
+            let totalD = await donation.getTotalDonations();
             console.log(`Total: ${totalD}`);
             console.log('================');
             console.log(user2);
-            let donation = await test.getDonators(user1);
-            let donatime = await test.getDanatorTime(user1);
+            let donation = await donation.getDonators(user1);
+            let donatime = await donation.getDanatorTime(user1);
             console.log(donation.toString());
             // time을 Date 객체로 변환
             let donationDate = new Date(donatime * 1000); // 자바스크립트에서 Date 객체는 밀리초 단위이므로 1000을 곱해야 함.
@@ -34,36 +34,36 @@ contract("test", function([deployer, user1, user2, user3]) {
             console.log(`time : ${formattedDate}`);
 
             //Donors 배열 길이 구하기
-            let Dolen = await test.getDonors();
+            let Dolen = await donation.getDonors();
             console.log(`length: ${Dolen}`);
 
             // 토큰 지급
-            await test.createGC(user1);
-            let giveGC = await test.getGC(user1);
+            await donation.createGC(user1);
+            let giveGC = await donation.getGC(user1);
             console.log(`GC: ${giveGC}`)
 
             // 50 금액 임의로 지급
-            await test.createItem(5);
+            await donation.createItem(5);
 
-            let buyItem_user1 = await test.buyItem(user1,0);
+            let buyItem_user1 = await donation.buyItem(user1,0);
 
-            const purchased_item = await test.items(0); 
+            const purchased_item = await donation.items(0); 
             console.log(`Item Price: ${purchased_item.price}, Purchased: ${purchased_item.purchased}`);
 
             //구매 후 잔액 조회
-            const balanceOfUser1 = await test.GC(user1);
+            const balanceOfUser1 = await donation.GC(user1);
             console.log(`Balance of user1 after purchase: ${balanceOfUser1}`);
         
     });
 
     it.only('Donate and display all donator information', async () => {
 
-        await test.donate({from: user1, value: testDonation})
-        await test.donate({from: user2, value: testDonation})
-        await test.donate({from: user3, value: testDonation})
+        await donation.donate({from: user1, value: testDonation})
+        await donation.donate({from: user2, value: testDonation})
+        await donation.donate({from: user3, value: testDonation})
         
 
-        const allDonators = await test.getDonatorCount();
+        const allDonators = await donation.getDonatorCount();
     
         allDonators.forEach((donatorInfo, index) =>{
             console.log(`Donator: ${index + 1}`);
