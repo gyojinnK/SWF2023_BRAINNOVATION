@@ -9,10 +9,14 @@ import DonateState from "./DonateState";
 const Mainwrap = (props: any) => {
     return (
         <div className="mainWrap">
-            <Navbar />
+            <Navbar account={props.account} donate={props.donate} />
             <Mypage balance={props.balance} account={props.account} />
             <Shop />
-            <DonateState />
+            <DonateState
+                account={props.account}
+                web3={props.web3}
+                donate={props.donate}
+            />
             <DonateList />
         </div>
     );

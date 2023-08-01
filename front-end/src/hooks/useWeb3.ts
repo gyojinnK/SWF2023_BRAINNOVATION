@@ -3,7 +3,7 @@ import Web3, { Contract } from "web3";
 
 import { useEffect, useState } from "react";
 
-let donateAddress = "0x603bffbe06222f6af45858483911616382c09207";
+let donateAddress = "0x6e6dAbBF8f464B90336b8BaD48a306e09D8492EB";
 let donateABI = [
     {
         inputs: [],
