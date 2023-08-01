@@ -3,13 +3,17 @@ import "./css/Mainwrap.css";
 import Navbar from "./Navbar";
 import Mypage from "./Mypage";
 import Shop from "./Shop";
+import DonateList from "./DonateList";
+import DonateState from "./DonateState";
 
-const Mainwrap = () => {
+const Mainwrap = (props: any) => {
     return (
         <div className="mainWrap">
             <Navbar />
-            <Mypage />
+            <Mypage balance={props.balance} account={props.account} />
             <Shop />
+            <DonateState />
+            <DonateList />
         </div>
     );
 };

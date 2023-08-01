@@ -9,7 +9,7 @@ nav {
     font-family: "PretendardTtfMedium";
     position: fixed;
     z-index: 10000;
-    left: 9.666%;
+    left: calc(50% - 40vw);
     top: 0;
 }
 nav > div {
@@ -51,12 +51,7 @@ nav > div {
     border: none;
     padding: 10px 20px;
     width: 100px;
-    background-color: rgba(
-        8.455056454986334,
-        40.66172830760479,
-        103.18056017160416,
-        1
-    );
+    background-color: rgba(47, 101, 245, 1);
     transition: 0.5s;
     box-sizing: border-box;
 }

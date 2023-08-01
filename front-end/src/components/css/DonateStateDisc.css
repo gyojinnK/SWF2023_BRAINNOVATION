@@ -1,0 +1,38 @@
+.dState_dscriptionWrap {
+    width: 55%;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    font-family: "PretendardTtfMedium";
+    font-size: 1.15rem;
+}
+
+.dState_d_amountsWrap,
+.dState_d_goalWrap,
+.dState_d_amount,
+.dState_d_goal {
+    margin: 0;
+}
+
+.dState_d_amountsWrap {
+    width: 40%;
+}
+
+.dState_sepor {
+    margin: 15px 0 0 0;
+    width: 2px;
+    height: 60px;
+    background-color: black;
+}
+
+.dState_d_goalWrap {
+    width: 40%;
+}
+
+.dState_d_amount,
+.dState_d_goal {
+    font-family: "PretendardTtfBold";
+    font-size: 1.25rem;
+}

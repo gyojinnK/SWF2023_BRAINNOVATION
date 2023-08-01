@@ -1,0 +1,25 @@
+.diWrap {
+    list-style: none;
+    padding: 45px 0 0 0;
+    width: 95%;
+    margin: 0 auto;
+}
+
+.di_contentWrap {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 50px;
+}
+
+.di_content {
+    display: inline-block;
+    width: 33.3333%;
+}
+
+.di_under {
+    height: 1px;
+    width: 95%;
+    background-color: rgb(204, 204, 204);
+    margin: 0 auto;
+}

@@ -1,0 +1,173 @@
+.totalWrap {
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 100vw;
+    height: 100vh;
+    z-index: 10000000;
+}
+
+.dnsaleWrap {
+    width: 550px;
+    height: 710px;
+    background-color: white;
+    border-radius: 20px;
+    position: absolute;
+    left: calc(50% - 275px);
+    top: calc(50% - 355px);
+    z-index: 1000000000;
+}
+
+.x {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+.dn_buy {
+    font-size: 1.5rem;
+    font-family: "PretendardTtfBold";
+    margin: 40px 0 30px 0;
+}
+
+.dn_underBar,
+.dn_underBar2,
+.dn_underBar3 {
+    width: 90%;
+    height: 2px;
+    background-color: rgb(201, 201, 201);
+    border-radius: 25px;
+    margin: 0 auto;
+}
+
+.dn_underBar {
+    margin: 0 auto 0px;
+}
+
+.dn_imdnon {
+    width: 90%;
+    height: 190px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.dn_img {
+    width: 150px;
+    height: 150px;
+    display: inline-block;
+}
+
+.dn_conWrap {
+    width: 260px;
+    margin: 0 20px 0;
+    height: 150px;
+    display: inline-block;
+}
+
+.dn_porName {
+    font-family: "PretendardTtfBold";
+    font-size: 1rem;
+    text-align: left;
+    margin: 0 0 0 0;
+}
+
+.dn_dd {
+    text-align: left;
+    font-size: 1.25rem;
+    width: 170px;
+    margin: 10px 0 50px 0;
+}
+
+.dn_underBar2,
+.dn_underBar3 {
+    background-color: rgb(201, 201, 201);
+    height: 2px;
+}
+
+.dn_totalcostWrap {
+    height: 70px;
+    width: 90%;
+    margin: 0 auto;
+    font-size: 1.5rem;
+    color: rgb(88, 88, 88);
+    padding: 35px 0 0 0;
+}
+
+.dn_totalcost_txt {
+    margin: 0 0 0 10px;
+    font-size: 0.95rem;
+    text-align: left;
+}
+
+.dn_donateSendWrap {
+    text-align: right;
+    margin: 0 10px 0 0;
+}
+
+.dn_totalcost_cost {
+    margin: 0 8px 0 0;
+    font-family: "PretendardTtfBold";
+    display: inline-block;
+    color: rgb(47, 101, 245);
+}
+
+.dn_eth {
+    font-size: 0.95rem;
+    display: inline-block;
+}
+
+.dn_underBar3 {
+    margin: 0 auto 35px;
+    height: 3px;
+    background-color: rgb(75, 75, 75);
+}
+
+.dn_minednWrap,
+.dn_stilldnWrap,
+.dn_transferWrap {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    color: rgb(88, 88, 88);
+    font-size: 1.15rem;
+}
+
+.dn_minednWrap {
+    margin: 0 auto 20px;
+}
+
+.dn_stilldnWrap {
+    margin: 0 auto 20px;
+}
+
+.dn_transferWrap {
+    margin: 0 auto 45px;
+}
+
+.dn_minedn_txt,
+.dn_stilldn_txt,
+.dn_transfer_txt {
+    margin: 5px 0 0 0;
+}
+
+.dn_minedn_dn,
+.dn_stilldn_dn,
+.dn_transfer_dn {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.dn_donate_btn {
+    width: 90%;
+    height: 75px;
+    background-color: rgb(47, 101, 245);
+    font-size: 1.15rem;
+    color: white;
+    border: none;
+    border-radius: 15px;
+}

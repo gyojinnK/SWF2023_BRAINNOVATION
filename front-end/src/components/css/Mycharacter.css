@@ -3,3 +3,50 @@
     height: 500px;
     background-color: blue;
 }
+
+.char__view {
+    width: 600px;
+    height: 440px;
+    background: url("../../img/character.png") center center no-repeat;
+}
+
+.char_metamask {
+    width: 600px;
+    height: 60px;
+    background-color: rgba(
+        8.455056454986334,
+        40.66172830760479,
+        103.18056017160416,
+        1
+    );
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.char_eth_account {
+    width: 200px;
+}
+
+.char_metamask_con {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.char_coin {
+    width: 25px;
+    margin: 0 5px 0 0;
+}
+
+.char_eth_view {
+    text-align: left;
+    margin: 0;
+    width: 100px;
+}
+
+.char_eth_amount {
+    margin: 0;
+    width: 100px;
+}
