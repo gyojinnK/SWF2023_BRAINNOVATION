@@ -58,6 +58,10 @@ contract Test{
         emit DONATION(msg.sender, msg.value);
     }
 
+    function getDonatorCount() public view returns (DonatorInfo[] memory) {
+        return donors;
+    }
+
     // 주소 & 기부자의 기부 금액 확인
     function getDonators(address donator) public view returns(uint256 result){
         require(donators[donator] > 0, 'This account did not donate');
@@ -96,7 +100,7 @@ contract Test{
     //GC 환율계산
     function calcGC(address donator) internal view returns(uint256 result) {
         uint256 donation = donators[donator];
-        uint256 dnGC = donation / 10;
+        uint256 dnGC = donation / 10**13;
         return dnGC;
     }
 

@@ -1,7 +1,7 @@
 const Test = artifacts.require("test");
 const { assert } = require("chai");
 const truffleAssert = require('truffle-assertions');
-const testDonation = 10 ** 15;
+const testDonation = 10 ** 14;
 
 
 contract("test", function([deployer, user1, user2, user3]) {
@@ -13,7 +13,7 @@ contract("test", function([deployer, user1, user2, user3]) {
       });
 
     describe.only('Donate', () => {
-        it.only('should allow users to donate ether', async() =>{
+        it('should allow users to donate ether', async() =>{
             console.log(await test.donate({from: user1, value: testDonation}));
             console.log(await test.donate({from: user2, value: testDonation}));
             console.log(await test.donate({from: user3, value: testDonation}));
@@ -43,7 +43,7 @@ contract("test", function([deployer, user1, user2, user3]) {
             console.log(`GC: ${giveGC}`)
 
             // 50 금액 임의로 지급
-            await test.createItem(50);
+            await test.createItem(5);
 
             let buyItem_user1 = await test.buyItem(user1,0);
 
@@ -53,24 +53,26 @@ contract("test", function([deployer, user1, user2, user3]) {
             //구매 후 잔액 조회
             const balanceOfUser1 = await test.GC(user1);
             console.log(`Balance of user1 after purchase: ${balanceOfUser1}`);
+        
+    });
 
-            // 가져온 기부자 정보를 순화하고 출력
-            donatorsInfo.foreEach((donation, index) => {
+    it.only('Donate and display all donator information', async () => {
 
-            // time을 Date 객체로 변환
-            let donationDate = new Date(donatime * 1000); // 자바스크립트에서 Date 객체는 밀리초 단위이므로 1000을 곱해야 함.
+        await test.donate({from: user1, value: testDonation})
+        await test.donate({from: user2, value: testDonation})
+        await test.donate({from: user3, value: testDonation})
+        
 
-            let formattedDate = `${donationDate.getFullYear()}-${
-                donationDate.getMonth() + 1}-${donationDate.getDate()} ${
-                donationDate.getHours()}:${donationDate.getMinutes()}:${donationDate.getSeconds()}`;
-
-                console.log(`Donator #${index + 1}`);
-                console.log(`Address: ${donation.donator}`);
-                console.log(`Donation: ${donation.donation}`);
-                console.log(`Donation Time: ${formattedDate}`);
-                console.log('---------------------');
-           })
-       });
+        const allDonators = await test.getDonatorCount();
+    
+        allDonators.forEach((donatorInfo, index) =>{
+            console.log(`Donator: ${index + 1}`);
+            console.log(`Address: ${donatorInfo.donation}`);
+            const donationDate = new Date(donatorInfo.donatiotime * 1000);
+            console.log(`Donation Time: ${donationDate.toLocaleTimeString()}`);
+        }) 
+    });
+  
 })
      
 
@@ -79,7 +81,6 @@ contract("test", function([deployer, user1, user2, user3]) {
         console.log(accounts[0]);
       })
 
-      
       /**
        * @dev 기부를 한 후에 기부자의 잔액이 올바르게 차감 되었는지 확인
        * 
