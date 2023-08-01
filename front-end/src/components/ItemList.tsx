@@ -8,7 +8,13 @@ const ItemList = () => {
     return (
         <div className="iListWrap">
             {clothes.map((item) => (
-                <ItemInfo url={item.url} name={item.name} cost={item.cost} />
+                <li className="iLit_li" key={item.url}>
+                    <ItemInfo
+                        url={item.url}
+                        name={item.name}
+                        cost={item.cost}
+                    />
+                </li>
             ))}
             ;
         </div>
