@@ -21,8 +21,17 @@ contract("test", function([deployer, user1, user2, user3]) {
             console.log(`Total: ${totalD}`);
             console.log('================');
             console.log(user2);
-            let donation = await test.getDonators(user2);
+            let donation = await test.getDonators(user1);
+            let donatime = await test.getDanatorTime(user1);
             console.log(donation.toString());
+            // time을 Date 객체로 변환
+            let donationDate = new Date(donatime * 1000); // 자바스크립트에서 Date 객체는 밀리초 단위이므로 1000을 곱해야 함.
+
+            let formattedDate = `${donationDate.getFullYear()}-${
+                donationDate.getMonth() + 1}-${donationDate.getDate()} ${
+                donationDate.getHours()}:${donationDate.getMinutes()}:${donationDate.getSeconds()}`;
+
+            console.log(`time : ${formattedDate}`);
 
             //Donors 배열 길이 구하기
             let Dolen = await test.getDonors();
@@ -45,8 +54,24 @@ contract("test", function([deployer, user1, user2, user3]) {
             const balanceOfUser1 = await test.GC(user1);
             console.log(`Balance of user1 after purchase: ${balanceOfUser1}`);
 
-        });
-    })
+            // 가져온 기부자 정보를 순화하고 출력
+            donatorsInfo.foreEach((donation, index) => {
+
+            // time을 Date 객체로 변환
+            let donationDate = new Date(donatime * 1000); // 자바스크립트에서 Date 객체는 밀리초 단위이므로 1000을 곱해야 함.
+
+            let formattedDate = `${donationDate.getFullYear()}-${
+                donationDate.getMonth() + 1}-${donationDate.getDate()} ${
+                donationDate.getHours()}:${donationDate.getMinutes()}:${donationDate.getSeconds()}`;
+
+                console.log(`Donator #${index + 1}`);
+                console.log(`Address: ${donation.donator}`);
+                console.log(`Donation: ${donation.donation}`);
+                console.log(`Donation Time: ${formattedDate}`);
+                console.log('---------------------');
+           })
+       });
+})
      
 
       it('accounts Check', async() =>{

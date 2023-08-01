@@ -5,6 +5,7 @@ contract Test{
     struct DonatorInfo{
         address payable donator;    // 기부자
         uint256 donation;   // 기부금
+        uint256 donatiotime; // 기부 시간
     }
 
 
@@ -19,13 +20,13 @@ contract Test{
 
     DonatorInfo[] public donors;    
     uint256[] public GCs;
-    uint256 itemCount = 0 ;    
+    uint256 itemCount = 0 ; 
+    uint256 donationTime = block.timestamp;    
 
-    mapping(address => uint256) public donators;
+    mapping(address => uint256) public donators; 
     mapping(address => uint256) public GC;
     mapping(uint256 =>  Item) public items; // 아이템 ID에 해당하는 아이템 정보를 저장하는 매핑
-
-
+    mapping(address => uint256) public donationTimes; // 기부자별 기부 시간 매핑
 
     event DONATION(address indexed donator, uint256 donation);
     event CREATEGC(address indexed donator, uint256 GC);
@@ -40,11 +41,15 @@ contract Test{
         require(msg.value > 0, 'You must send some ether to donate');
         // 기부자의 기부금을 업데이트
         donators[msg.sender] += msg.value;
+        // 기부자의 시간 업데이트
+        donationTimes[msg.sender] = donationTime;
+
         // 기부자가 처음 기부한 경우, donors 배열에 추가
         if(donators[msg.sender] == msg.value){
             DonatorInfo memory d;
             d.donator = owner;
             d.donation = msg.value;
+            d.donatiotime = donationTime; // 기부 시간을 기록
             donors.push(d);
         }
 
@@ -57,7 +62,12 @@ contract Test{
     function getDonators(address donator) public view returns(uint256 result){
         require(donators[donator] > 0, 'This account did not donate');
         uint256 donation = donators[donator];
-        return donation;
+        return donation ;
+    }
+
+    // 시간 출력 
+    function getDanatorTime(address donator) public view returns (uint256 result) {
+        return donationTimes[donator];
     }
 
     /** 
@@ -101,6 +111,8 @@ contract Test{
        items[itemCount++] = Item(itemPrice, false);
     }
 
+
+
     // 아이템 구매 기능
     function buyItem(address donator, uint256 itemId) public {
         require(GC[donator] > 0, "You don't have GCOIN.");
@@ -123,11 +135,5 @@ contract Test{
     function deductBalance(address donator, uint256 amount) internal  {
         GC[donator] -= amount;
     }
-
-
-    
-
-
-
 
 }
