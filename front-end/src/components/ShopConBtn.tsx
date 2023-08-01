@@ -11,13 +11,36 @@ const ShopConBtn = () => {
                   left: "100px",
               }
             : undefined;
+    const btnStyle1 = btnClick[0]!
+        ? {
+              fontFamily: "PretendardTtfMedium",
+          }
+        : {
+              fontFamily: "PretendardTtfRegular",
+          };
+
+    const btnStyle2 = btnClick[1]!
+        ? {
+              fontFamily: "PretendardTtfMedium",
+          }
+        : {
+              fontFamily: "PretendardTtfRegular",
+          };
 
     return (
         <div className="shopConBtnWrap">
-            <button className="scBtn" onClick={() => setBtnClick([1, 0])}>
+            <button
+                className="scBtn"
+                onClick={() => setBtnClick([1, 0])}
+                style={btnStyle1}
+            >
                 Clothes
             </button>
-            <button className="scBtn" onClick={() => setBtnClick([0, 1])}>
+            <button
+                className="scBtn"
+                onClick={() => setBtnClick([0, 1])}
+                style={btnStyle2}
+            >
                 Acc
             </button>
             <div className="scBtn__underWrap">

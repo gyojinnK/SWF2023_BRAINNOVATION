@@ -1,4 +1,11 @@
 .iListWrap {
-    width: 85%;
+    width: 100%;
     margin: 0 auto;
+}
+
+.iLit_li {
+    list-style: none;
+    display: inline-block;
+    width: 200px;
+    margin: 0 40px;
 }
