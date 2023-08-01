@@ -69,7 +69,12 @@ contract("test", function([deployer, user1, user2, user3]) {
             console.log(`Donator: ${index + 1}`);
             console.log(`Address: ${donatorInfo.donation}`);
             const donationDate = new Date(donatorInfo.donatiotime * 1000);
-            console.log(`Donation Time: ${donationDate.toLocaleTimeString()}`);
+            let formattedDate = `${donationDate.getFullYear()}-${
+                donationDate.getMonth() + 1}-${donationDate.getDate()} ${
+                donationDate.getHours()}:${donationDate.getMinutes()}:${donationDate.getSeconds()}`;
+
+            console.log(`time : ${formattedDate}`);
+            
         }) 
     });
   
