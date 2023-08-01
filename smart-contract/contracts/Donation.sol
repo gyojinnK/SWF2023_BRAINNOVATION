@@ -1,7 +1,7 @@
  // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
-contract Test{
+contract Donation{
     struct DonatorInfo{
         address payable donator;    // 기부자
         uint256 donation;   // 기부금
